@@ -1,0 +1,20 @@
+<div>
+  <div *ngIf="!history || history.length == 0">
+    <h5 class="alert alert-danger">
+      <i>No History Found !</i>
+    </h5>
+  </div>
+  <div *ngIf="history && history.length > 0">
+    <h5 class="alert alert-warning">
+      <i>History List :</i>
+    </h5>
+    <div *ngFor="let hi of history; let i = index">
+      <span>
+        {{ i + 1 }}.
+      </span>
+      <span>
+        {{ hi }}
+      </span>
+    </div>
+  </div>
+</div>

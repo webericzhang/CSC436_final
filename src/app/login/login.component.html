@@ -1,0 +1,11 @@
+<form (ngSubmit)="onLoginEmail()">
+
+  <label for="email" style="color:coral;line-height: inherit;font-size:25px">Email:</label>
+  <input type="text" class="form-control" id="email" name="email" required [(ngModel)]="email">
+
+  <label for="password" style="color:coral;line-height: inherit;font-size:25px">Password:</label>
+  <input type="password" class="form-control" id="password" name="password" required [(ngModel)]="password">
+
+  <button type="submit" class="btn btn-info" style="margin-top:20px">Log In</button>
+
+</form>

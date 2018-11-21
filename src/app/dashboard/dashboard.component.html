@@ -1,0 +1,82 @@
+<div>
+  <div class="form-group" style="background-color: blanchedalmond;border-radius: 6px;padding:10px 20px">
+    <div>
+      <label for="email" style="color:peru;font-size:20px">Email:</label>
+      <input type="text" name="email" style="margin-left: 5px;margin-right: 5px" [(ngModel)]="searchEmail">
+      <button (click)="searchWithEmail()" class="btn btn-warning comStyle" style="vertical-align: initial">Search</button>
+    </div>
+
+    <div *ngIf="searchCardWithEmail">
+      <app-businessCardDetail [businessCard]="searchCardWithEmail" [searchWith]="'with email'"></app-businessCardDetail>
+    </div>
+  </div>
+
+  <div class="form-group" style="background-color: lavender;border-radius: 6px;padding:10px 20px">
+    <h5 style="color:rebeccapurple">
+      WEB CAMERA :
+    </h5>
+    <div>
+      <div *ngIf="isCamera">
+        <webcam [height]="360" [width]="480" [trigger]="getTrigger" (imageCapture)="getImage($event)" *ngIf="isCamera"></webcam>
+      </div>
+      <button (click)="snapshot()" *ngIf="isCamera" class="btn btn-primary deStyle">Snapshot</button>
+      <button (click)="switchCamera()" class="btn btn-primary deStyle">Switch Camera</button>
+    </div>
+  </div>
+
+  <div class="form-group" style="background-color: mediumaquamarine;border-radius: 6px;padding:10px 20px">
+
+    <div class="deStyle">
+      <label class="forLabel">First Name: </label>
+      <input type="text" [(ngModel)]="deFirstName" [disabled]="!detected">
+    </div>
+    <div class="deStyle">
+      <label class="forLabel">Last Name: </label>
+      <input type="text" [(ngModel)]="deLastName" [disabled]="!detected">
+    </div>
+    <div class="deStyle">
+      <label class="forLabel">Email : </label>
+      <input type="text" [(ngModel)]="deEmail" [disabled]="!detected">
+    </div>
+    <div class="deStyle">
+      <label class="forLabel">Phone Num : </label>
+      <input type="text" [(ngModel)]="dePhoneNum" [disabled]="!detected">
+    </div>
+    <div class="deStyle">
+      <label class="forLabel">Text : </label>
+      <input type="text" [(ngModel)]="deText" [disabled]="!detected" class="extra-text">
+    </div>
+    <button (click)="detectText()" [disabled]="!isImage" class="btn btn-success deStyle">Text Detection</button>
+    <button (click)="addCard()" [disabled]="!detected" class="btn btn-success deStyle">Add
+      Business Card</button>
+  </div>
+  <hr>
+  <div *ngIf="!businessCards || businessCards.length == 0">
+    <h5 class="alert alert-danger">
+      <i>No Business Card Found !</i>
+    </h5>
+  </div>
+  <div *ngIf="businessCards && businessCards.length > 0">
+    <h5 class="alert alert-warning">
+      <i>Business Card List :</i>
+    </h5>
+    <div *ngFor="let bc of businessCards; let i = index">
+      <div>
+        <span>
+          {{ i + 1 }}.
+        </span>
+        <span>
+          {{ bc.phoneNumber }},
+        </span>
+        <span>
+          {{ bc.email }},
+        </span>
+      </div>
+      <div>
+        <img [src]="businessCard.imageUri" [height]="270" [width]="360">
+      </div>
+    </div>
+  </div>
+
+
+</div>
